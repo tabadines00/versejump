@@ -7,6 +7,8 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { MessageSquare, Menu, Send, Plus, Trash, User } from 'lucide-react';
 
+import aiChat from './model-interface';
+
 // Message component to display chat messages
 const Message = ({ message, isUser }) => {
   return (
@@ -136,13 +138,15 @@ export default function ChatInterface() {
       timestamp: new Date().toISOString()
     };
     
-    // Mock AI response (in a real app, you would call your LLM API here) ///////////////////////////////////////////////////////
+    // Mock AI response (in a real app, you would call your LLM API here) /////////////////////////////// TODO: LLM 
+    const aiResponse = await aiChat(inputValue)
     const aiMessage = {
       id: (Date.now() + 1).toString(),
-      content: `This is a simulated response to: "${inputValue}"`,
+      content: aiResponse,
       isUser: false,
       timestamp: new Date().toISOString()
     };
+    //////////////////////////////////////////////////////
     
     const updatedMessages = [...messages, userMessage, aiMessage];
     setMessages(updatedMessages);
